@@ -20,8 +20,17 @@ async function run() {
   //   Array.from(document.querySelectorAll("a"), (e) => e.href)
   // );
 
-  const courses = await page.evaluate(() =>
-    Array.from(document.querySelectorAll("#courses .card"), (e) => ({
+  // const courses = await page.evaluate(() =>
+  //   Array.from(document.querySelectorAll("#courses .card"), (e) => ({
+  //     title: e.querySelector(".card-body h3").innerText,
+  //     level: e.querySelector(".card-body .level").innerText,
+  //     url: e.querySelector(".card-footer a").href,
+  //     promo: e.querySelector(".card-footer .promo-code .promo").innerText,
+  //   }))
+  // );
+
+  const courses = await page.$$eval("#courses .card", (el) =>
+    el.map((e) => ({
       title: e.querySelector(".card-body h3").innerText,
       level: e.querySelector(".card-body .level").innerText,
       url: e.querySelector(".card-footer a").href,
