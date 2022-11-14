@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const puppeteer = require("puppeteer");
 
 async function run() {
@@ -38,7 +40,11 @@ async function run() {
     }))
   );
 
-  console.log("links :>> ", courses);
+  // Save Data to JSON file
+  fs.writeFile("courses.json", JSON.stringify(courses), (err) => {
+    if (err) throw new err();
+    console.log("File Saved ");
+  });
 
   await browser.close();
 }
